@@ -136,7 +136,7 @@ void setupCFW(void)
         if((updatedSys && (!mode || (pressed & BUTTON_R1))) || (!updatedSys && mode && !(pressed & BUTTON_R1)))
         {
             /* If not 9.0 FIRM and the second emuNAND is set as default and B isn't pressed, or vice-versa,
-               attempt to boot it */ 
+               attempt to boot it */
             emuNAND = (mode && ((!(pressed & BUTTON_B)) == CONFIG(4, 1))) ? 2 : 1;
         }
         else emuNAND = 0;
@@ -368,7 +368,11 @@ static inline void injectLoader(void)
     if(injector_size <= (int)loaderSize)
     {
         memset((void *)loaderOffset, 0, loaderSize);
-        memcpy((void *)loaderOffset, injector, injector_size);
+        if(CONFIG(8, 1)) {
+            fileRead((void *)loaderOffset, "/aurei/injector.cxi", injector_size);
+        } else {
+            memcpy((void *)loaderOffset, injector, injector_size);
+        }
 
         //Patch content size and ExeFS size to match the repaced loader's ones
         *((u32 *)loaderOffset + 0x41) = loaderSize / 0x200;

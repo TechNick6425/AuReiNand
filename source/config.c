@@ -27,7 +27,8 @@ void configureCFW(const char *configPath, const char *patchedFirms[])
                                   "( ) Use second EmuNAND as default",
                                   "( ) Show current NAND in System Settings",
                                   "( ) Show GBA boot screen in patched AGB_FIRM",
-                                  "( ) Enable splash screen with no screen-init" };
+                                  "( ) Enable splash screen with no screen-init",
+                                  "( ) Load loader from SD" };
 
     u32 optionsAmount = sizeof(optionsText) / sizeof(char *);
 
